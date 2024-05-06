@@ -1,0 +1,152 @@
+:root {
+    --duration-0: 0s;
+    --duration-75: 75ms;
+    --duration-100: 100ms;
+    --duration-150: 150ms;
+    --duration-200: 200ms;
+    --duration-300: 300ms;
+    --duration-500: 500ms;
+    --duration-700: 700ms;
+    --duration-1000: 1000ms;
+
+    --delay-0: 0s;
+    --delay-75: 75ms;
+    --delay-100: 100ms;
+    --delay-150: 150ms;
+    --delay-200: 200ms;
+    --delay-300: 300ms;
+    --delay-500: 500ms;
+    --delay-700: 700ms;
+    --delay-1000: 1000ms;
+
+    --ease-liner: linear;
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+.ping {
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.bounce {
+    animation: bounce 1s infinite;
+}
+
+.fadeIn {
+    animation: fadeIn 300ms ease-out;
+}
+
+.fadeOut {
+    animation: fadeOut 300ms ease-in;
+}
+
+.transition-all {
+    transition-property: all;
+    transition-timing-function: var(--ease-in-out);
+    transition-duration: var(--duration-150);
+}
+
+.transition {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: var(--ease-in-out);
+    transition-duration: var(--duration-150);
+}
+
+.transition-colors {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: var(--ease-in-out);
+    transition-duration: var(--duration-150);
+}
+
+.transition-opacity {
+    transition-property: opacity;
+    transition-timing-function: var(--ease-in-out);
+    transition-duration: var(--duration-150);
+}
+
+.transition-shadow {
+    transition-property: box-shadow;
+    transition-timing-function: var(--ease-in-out);
+    transition-duration: var(--duration-150);
+}
+
+.transition-transform {
+    transition-property: transform;
+    transition-timing-function: var(--ease-in-out);
+    transition-duration: var(--duration-150);
+}
+
+/** Keyframes **/
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ping {
+
+    75%,
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(-25%);
+        animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+
+    50% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
