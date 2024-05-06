@@ -1,35 +1,37 @@
 const { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync } = require('fs');
 const { resolve, join } = require('path');
+const { Root } = require('postcss/lib/postcss');
 
 const buildConfig = () => {
+
+
+
     return {
         postcssPlugin: 'combine-css',
-        Once(root, { result }) {
-            // Directory containing CSS files to be combined
-            const srcDir = './src';
+        // AtRule: {
+        //     import: rule => {
+        //         
+        //     }
+        // },
 
-            // Combined CSS file name
-            const combinedFileName = 'index.css';
+        Once(css, { result }) {
 
-            // Resolve the absolute path of the source directory
-            const srcPath = resolve(srcDir);
+            const combinedFileName = "index.css";
+            const srcPath = resolve(__dirname, "./src");
 
-            // Get a list of CSS files in the source directory
-            const cssFiles = readdirSync(srcPath).filter(file => file.endsWith('.css'));
-
-            // Combine content of all CSS files
             let combinedContent = '';
-            cssFiles.forEach(file => {
-                const filePath = join(srcPath, file);
-                const fileContent = readFileSync(filePath, 'utf8');
-                combinedContent += fileContent + '\n';
+
+            css.walkAtRules(/import/, rule => {
+                const importPath = resolve(srcPath, rule.params.replaceAll("\"", ""));
+                if (existsSync(importPath)) {
+                    const fileContent = readFileSync(importPath, 'utf8');
+                    combinedContent += fileContent + '\n';
+                } else {
+                    combinedContent = `@import ${rule.params};\n\n` + combinedContent;
+                }
             });
 
-            // Write the combined content to a new file
             writeFileSync(combinedFileName, combinedContent);
-
-            // Log success message
-            console.log(`Combined ${cssFiles.length} CSS files into ${combinedFileName}`);
         }
     };
 };
