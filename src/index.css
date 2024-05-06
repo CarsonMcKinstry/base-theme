@@ -1,3 +1,4 @@
+@import "modern-normalize/modern-normalize.css";
 @import "./colors.css";
 @import "./screens.css";
 @import "./shadow.css";

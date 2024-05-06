@@ -1,6 +1,6 @@
 {
   "name": "@carsonmckinstry/base-theme",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "main": "./index.css",
   "devDependencies": {
@@ -10,5 +10,8 @@
   "scripts": {
     "build": "postcss ./src/index.css",
     "prepublish": "yarn build"
+  },
+  "dependencies": {
+    "@csstools/normalize.css": "^12.1.1"
   }
 }
