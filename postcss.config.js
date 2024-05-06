@@ -1,4 +1,4 @@
-const { readFileSync, readdirSync, writeFileSync } = require('fs');
+const { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync } = require('fs');
 const { resolve, join } = require('path');
 
 const buildConfig = () => {
@@ -7,9 +7,14 @@ const buildConfig = () => {
         Once(root, { result }) {
             // Directory containing CSS files to be combined
             const srcDir = './src';
+            const outDir = './dist';
+
+            if (!existsSync(resolve(outDir))) {
+                mkdirSync(resolve(outDir));
+            }
 
             // Combined CSS file name
-            const combinedFileName = 'combined.css';
+            const combinedFileName = 'index.css';
 
             // Resolve the absolute path of the source directory
             const srcPath = resolve(srcDir);
@@ -26,7 +31,7 @@ const buildConfig = () => {
             });
 
             // Write the combined content to a new file
-            writeFileSync(combinedFileName, combinedContent);
+            writeFileSync(join(outDir, combinedFileName), combinedContent);
 
             // Log success message
             console.log(`Combined ${cssFiles.length} CSS files into ${combinedFileName}`);
