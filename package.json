@@ -12,6 +12,6 @@
     "prepublish": "yarn build"
   },
   "peerDependencies": {
-    "@csstools/normalize.css": "^12.1.1"
+    "modern-normalize": "^2.0.0"
   }
 }
