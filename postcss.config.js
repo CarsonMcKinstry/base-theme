@@ -7,11 +7,6 @@ const buildConfig = () => {
         Once(root, { result }) {
             // Directory containing CSS files to be combined
             const srcDir = './src';
-            const outDir = './dist';
-
-            if (!existsSync(resolve(outDir))) {
-                mkdirSync(resolve(outDir));
-            }
 
             // Combined CSS file name
             const combinedFileName = 'index.css';
@@ -31,7 +26,7 @@ const buildConfig = () => {
             });
 
             // Write the combined content to a new file
-            writeFileSync(join(outDir, combinedFileName), combinedContent);
+            writeFileSync(combinedFileName, combinedContent);
 
             // Log success message
             console.log(`Combined ${cssFiles.length} CSS files into ${combinedFileName}`);
